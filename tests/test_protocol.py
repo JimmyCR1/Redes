@@ -32,6 +32,7 @@ class ProtocolTests(unittest.TestCase):
             results += parser.feed(bytes([byte]))
         self.assertEqual(results, [decode(frame), decode(frame)])
         self.assertEqual(parser.errors, 1)
+        self.assertEqual(parser.last_bad, bytes(bad))
 
     def test_version_rejected_even_with_valid_crc(self):
         frame = bytearray(encode(self.a, self.b, 1, b'x'))

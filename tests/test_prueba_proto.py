@@ -1,6 +1,6 @@
 import unittest
 from DispositivoLuzAdaptador import decode
-from prueba_proto import intercambio, vaciar
+from prueba_proto import diferencias, intercambio, vaciar
 
 
 class Espejo:
@@ -28,6 +28,9 @@ class PruebaProtoTests(unittest.TestCase):
         device = Espejo(tapado=True)
         device.pending.append(('vieja',))
         self.assertEqual(intercambio(device, 1), 0)
+
+    def test_diferencias_marca_bytes_danados(self):
+        self.assertEqual(diferencias(b'\x01\x02\x03', b'\x01\x06\x03'), [(1, 2, 6)])
 
     def test_vaciar_descarta_pendientes(self):
         device = Espejo()

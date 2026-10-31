@@ -31,17 +31,37 @@ def vaciar(device):
         pass
 
 
+def diferencias(enviada, recibida):
+    """Posiciones donde la trama recibida no coincide: (byte, enviado, recibido)."""
+    return [(i, a, b) for i, (a, b) in enumerate(zip(enviada, recibida)) if a != b]
+
+
+def mostrar_danos(device, trama):
+    parser = getattr(device, 'parser', None)
+    if parser is None or parser.last_bad is None:
+        print('   No llegó ninguna trama reconocible (ni siquiera la sincronización).')
+        return
+    danos = diferencias(trama, parser.last_bad)
+    print(f'   Llegó dañada: {len(danos)} byte(s) distinto(s)')
+    for i, a, b in danos[:8]:
+        print(f'   byte {i:3}: enviado {a:02x} {a:08b}  recibido {b:02x} {b:08b}')
+
+
 def intercambio(device, count):
     correctas = 0
     for seq in range(count):
         trama = encode(ORIGEN, DESTINO, seq, f'Hola Faro {seq + 1}'.encode())
         vaciar(device)
+        if getattr(device, 'parser', None) is not None:
+            device.parser.last_bad = None
         inicio = time.monotonic()
         device.send(trama)
         ok = device.receive(3) == decode(trama)
         correctas += ok
         print(f'Trama {seq + 1}/{count}: {"OK" if ok else "NO LLEGO"} '
               f'({time.monotonic() - inicio:.1f} s)')
+        if not ok:
+            mostrar_danos(device, trama)
     return correctas
 
 
@@ -63,7 +83,10 @@ def main():
                   'a 5-10 mm y que nada tape el camino. Se esperaba 1 y 0.')
             raise SystemExit(1)
         if args.tapado and encendido == 0:
-            print('Aviso: el receptor todavía detecta luz con el haz tapado.')
+            print('El receptor todavía ve la luz: el cartón delgado deja pasar el '
+                  'infrarrojo. Tapa la punta del PT333 con papel aluminio o una '
+                  'moneda y repite. Se esperaba encendido=1.')
+            raise SystemExit(1)
         print(f'Enviando {args.count} tramas; cada una tarda unos 4-5 segundos...')
         correctas = intercambio(device, args.count)
         print(f'{correctas}/{args.count} correctas; tramas descartadas por '

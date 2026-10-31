@@ -45,6 +45,7 @@ class Parser:
     def __init__(self):
         self.buffer = bytearray()
         self.errors = 0
+        self.last_bad = None  # Última trama rechazada, para diagnóstico.
 
     def feed(self, data):
         self.buffer.extend(data)
@@ -61,6 +62,7 @@ class Parser:
                 frame = decode(bytes(self.buffer[:FRAME_SIZE]))
             except ValueError:
                 self.errors += 1
+                self.last_bad = bytes(self.buffer[:FRAME_SIZE])
                 del self.buffer[0]
             else:
                 del self.buffer[:FRAME_SIZE]
