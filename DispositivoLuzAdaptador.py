@@ -13,6 +13,9 @@ VERSION = 1
 FRAME_SIZE = 128
 PAYLOAD_SIZE = 105
 HEADER = struct.Struct('!4sBB6s6sHB')
+# Byte de relleno tras cada trama: el lector de pigpio cierra un byte en el
+# siguiente cambio de luz; sin él, los últimos bits en 1 del CRC se leían como 0.
+TRAILER = b'\x00'
 REQUEST, RESPONSE = 1, 2
 
 
@@ -134,7 +137,7 @@ class DispositivoLuzAdaptador:
         decode(frame)
         self.pi.write(self.tx_led, 1)
         self.pi.wave_add_new()
-        self.pi.wave_add_serial(self.tx, self.baud, frame, offset=10000)
+        self.pi.wave_add_serial(self.tx, self.baud, frame + TRAILER, offset=10000)
         wave = self.pi.wave_create()
         try:
             self.check()

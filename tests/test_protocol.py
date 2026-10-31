@@ -34,6 +34,26 @@ class ProtocolTests(unittest.TestCase):
         self.assertEqual(parser.errors, 1)
         self.assertEqual(parser.last_bad, bytes(bad))
 
+    def test_send_adds_trailer_and_parser_ignores_it(self):
+        class FakePi:
+            def __init__(self):
+                self.sent = b''
+            def wave_add_serial(self, pin, baud, data, offset=0):
+                self.sent += data
+            def wave_tx_busy(self):
+                return False
+            def __getattr__(self, name):
+                return lambda *args: 0
+        device = DispositivoLuzAdaptador.__new__(DispositivoLuzAdaptador)
+        device.pi, device.stopped = FakePi(), False
+        device.tx, device.tx_led, device.baud = 17, 22, 300
+        frame = encode(self.a, self.b, 4, b'Hola Faro 5')
+        device.send(frame)
+        self.assertEqual(device.pi.sent, frame + TRAILER)
+        parser = Parser()
+        self.assertEqual(parser.feed(device.pi.sent * 2), [decode(frame)] * 2)
+        self.assertEqual(parser.errors, 0)
+
     def test_version_rejected_even_with_valid_crc(self):
         frame = bytearray(encode(self.a, self.b, 1, b'x'))
         frame[4] = 2
