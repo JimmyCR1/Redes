@@ -5,7 +5,8 @@ from DispositivoLuzAdaptador import (
     DispositivoLuzAdaptador, address, encode, REQUEST, RESPONSE,
 )
 
-PINS = {'A': (17, 27, 22, 23, 24), 'B': (5, 6, 13, 19, 26)}
+# Mismo cableado en ambos Faros: cada uno va en su propia Raspberry.
+PINS = {'A': (17, 27, 22, 23, 24), 'B': (17, 27, 22, 23, 24)}
 
 
 def main():

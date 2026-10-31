@@ -1,5 +1,10 @@
 # Primera prueba: dos Faros, lo más sencillo posible
 
+> **Actualización:** el montaje que funcionó en protoboard está en
+> [MONTAJE_CONFIRMADO.md](MONTAJE_CONFIRMADO.md). Ahí se usan LED IR + PT333
+> redondos, 10 kΩ en lugar de 100 kΩ y los mismos pines en A y B. Donde esta
+> guía preliminar difiera, manda MONTAJE_CONFIRMADO.md.
+
 Abrir [la guía interactiva de protoboard](protoboard.html) para ver agujeros,
 componentes y pines. Funciona sin Internet. Permite una MB102 compartida
 (A: filas 1–30; B: 34–63) o dos protoboards independientes.
