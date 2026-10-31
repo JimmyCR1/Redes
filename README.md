@@ -25,3 +25,5 @@ Con el LED IR apuntando al PT333 del mismo Faro:
 python3 prueba_proto.py --count 5        # espera: PRUEBA OPTICA LOCAL CORRECTA
 python3 prueba_proto.py --count 2 --tapado  # espera: PRUEBA CON HAZ TAPADO CORRECTA
 ```
+
+Para probar el proyecto de JuankGO con este mismo circuito: [parches/LEEME.md](parches/LEEME.md).
