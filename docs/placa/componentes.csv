@@ -1,0 +1,15 @@
+﻿ID,Componente,Valor,Terminales,Nota
+D1,LED infrarrojo transparente,,A: H05; K: I05,Conservar la polaridad que funcionó en protoboard. Punta hacia fuera de la cara de componentes.
+Q2,Receptor PT333 negro,,C: Y05; E: Z05,C al nodo RX y E a GND. Conservar las patas identificadas en la prueba; no deducirlas por color o longitud.
+R1,Limitadora del LED IR,330 Ω,1: H10; 2: H14,
+R2,Resistencia de base,"2,2 kΩ",1: M18; 2: Q18,
+R3,Base a GND,10 kΩ,1: L22; 2: P22,Valor que funcionó. No sustituir por 100 Ω ni 330 Ω.
+R4,Pull-up del receptor,10 kΩ,1: Y10; 2: Y14,
+Q1,2N2222A,,E: H18; B: I18; C: J18,Usar E/B/C de la pieza que ya funcionó. Recomendado zócalo hembra 1×3 en esos agujeros; no invertir la pieza por mirar la cara de cobre.
+D2,Indicador TX,TX,A: H25; K: I25,
+D3,Indicador RX,RX,A: Y25; K: Z25,
+R5,Limitadora indicador TX,1 kΩ,1: H28; 2: H32,
+R6,Limitadora indicador RX,1 kΩ,1: Y28; 2: Y32,
+SW1,Pulsador rojo de cuatro patas,,S: O33; libre1: T33; libre2: O35; G: T35,"Se cablean dos esquinas diagonales S y G; las otras dos islas quedan sin cable externo. Huella prevista 12,7 × 5,08 mm, inferida del montaje que funcionó: comprobar encaje en seco y conmutación antes de soldar."
+C1,Condensador cerámico sin polaridad,100 nF,1: O40; 2: Q40,"0,1 µF, habitualmente marcado 104. Ninguna pata tiene polaridad."
+J1,Conector hembra desmontable a Raspberry,"1×7 · 2,54 mm",GND: N43; 3V3: O43; TX: P43; RX: Q43; TX_LED: R43; RX_LED: S43; PANIC: T43,Tira hembra para conservar los jumpers hembra–macho actuales. Enchufar con ambas alimentaciones desconectadas. Etiquetar cada contacto.

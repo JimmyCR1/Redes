@@ -9,7 +9,7 @@ from DispositivoLuzAdaptador import (
 PINS = {'A': (17, 27, 22, 23, 24), 'B': (17, 27, 22, 23, 24)}
 
 
-def main():
+def main(argv=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('command', choices=['address', 'rotate', 'serve', 'ping'])
     parser.add_argument('--node', required=True, choices=PINS)
@@ -17,7 +17,7 @@ def main():
     parser.add_argument('--peer', help='Dirección hexadecimal del otro Faro')
     parser.add_argument('--message', default='Hola Faro')
     parser.add_argument('--count', type=int, default=3)
-    args = parser.parse_args()
+    args = parser.parse_args(argv)
     state = args.state or f'~/.local/state/faronet/{args.node}.addr'
     own = address(state, args.command == 'rotate')
     if args.command in ('address', 'rotate'):

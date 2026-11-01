@@ -1,0 +1,27 @@
+﻿ID,Desde,Hasta,Red,Función
+BG,B03,B45,GND,Barra continua; unir derivaciones
+BV,AF03,AF45,3V3,Barra continua; unir derivaciones
+W01,O43,AF43,3V3,"Pin 1 de Raspberry a la barra 3,3 V"
+W02,O40,AF40,3V3,"Desacoplo a 3,3 V"
+W03,H10,AF10,3V3,Alimentación de R1
+W04,Y10,AF11,3V3,Alimentación de R4
+W05,N43,B43,GND,Pin 6 de Raspberry a la barra GND
+W06,Q40,B40,GND,Desacoplo a GND
+W07,H18,B18,GND,Emisor de Q1 a GND
+W08,P22,B22,GND,R3 a GND
+W09,Z05,B05,GND,Emisor del PT333 a GND
+W10,I25,B25,GND,Cátodo indicador TX a GND
+W11,Z25,B26,GND,Cátodo indicador RX a GND
+W12,T35,B35,GND,Contacto G del botón a GND
+W13,H14,H05,IR_A,R1 al ánodo del LED IR
+W14,I05,J18,COL,Cátodo IR al colector Q1
+W15,P43,Q18,TX,GPIO17 a R2
+W16,M18,I18,BASE,R2 a base Q1
+W17,I18,L22,BASE,Base Q1 a R3
+W18,Y14,Y05,RX,R4 al colector PT333
+W19,Q43,Y14,RX,Nodo RX a GPIO27
+W20,R43,H32,TX_LED,GPIO22 a R5
+W21,H28,H25,TX_A,R5 al ánodo indicador TX
+W22,S43,Y32,RX_LED,GPIO23 a R6
+W23,Y28,Y25,RX_A,R6 al ánodo indicador RX
+W24,T43,O33,PANIC,GPIO24 al contacto S del botón

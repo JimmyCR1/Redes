@@ -27,3 +27,20 @@ python3 prueba_proto.py --count 2 --tapado  # espera: PRUEBA CON HAZ TAPADO CORR
 ```
 
 Para probar el proyecto de JuankGO con este mismo circuito: [parches/LEEME.md](parches/LEEME.md).
+
+## Plano detallado de soldadura HS-03
+
+Abrir el [plano interactivo](docs/placa/index.html) descargado en el navegador,
+o imprimir el [PDF de tres hojas](docs/placa/FaroNet-HS03-plano.pdf) al 100 %.
+La [guía de soldadura](docs/placa/MONTAJE.md) explica las dos caras, las
+coordenadas de cada pieza, las barras, los 24 cables y las comprobaciones físicas.
+La distribución sirve para ambas Raspberry con los mismos GPIO.
+Este plano tiene coordenadas propias: no mezclar sus agujeros con los de
+`docs/placa-perforada.html`, que conserva la distribución anterior.
+
+```sh
+python3 tools/verificar_placa.py
+```
+
+Para usar los scripts `emisor.py` y `receptor.py` en dos Raspberry independientes,
+consultar [PRUEBAS_PROTO](docs/PRUEBAS_PROTO.md).

@@ -1,0 +1,568 @@
+{
+  "board": {
+    "model": "HS-03",
+    "width_mm": 90,
+    "height_mm": 145,
+    "columns": 33,
+    "rows": 48,
+    "pitch_mm": 2.54,
+    "origin": "Coordenadas definidas mirando el cobre, fila 01 arriba: A a AG de izquierda a derecha. En componentes se reflejan solo las columnas."
+  },
+  "parts": [
+    {
+      "id": "D1",
+      "kind": "ir",
+      "name": "LED infrarrojo transparente",
+      "pins": {
+        "A": "H05",
+        "K": "I05"
+      },
+      "value": "",
+      "note": "Conservar la polaridad que funcionó en protoboard. Punta hacia fuera de la cara de componentes."
+    },
+    {
+      "id": "Q2",
+      "kind": "photo",
+      "name": "Receptor PT333 negro",
+      "pins": {
+        "C": "Y05",
+        "E": "Z05"
+      },
+      "value": "",
+      "note": "C al nodo RX y E a GND. Conservar las patas identificadas en la prueba; no deducirlas por color o longitud."
+    },
+    {
+      "id": "R1",
+      "kind": "res",
+      "name": "Limitadora del LED IR",
+      "pins": {
+        "1": "H10",
+        "2": "H14"
+      },
+      "value": "330 Ω",
+      "note": ""
+    },
+    {
+      "id": "R2",
+      "kind": "res",
+      "name": "Resistencia de base",
+      "pins": {
+        "1": "M18",
+        "2": "Q18"
+      },
+      "value": "2,2 kΩ",
+      "note": ""
+    },
+    {
+      "id": "R3",
+      "kind": "res",
+      "name": "Base a GND",
+      "pins": {
+        "1": "L22",
+        "2": "P22"
+      },
+      "value": "10 kΩ",
+      "note": "Valor que funcionó. No sustituir por 100 Ω ni 330 Ω."
+    },
+    {
+      "id": "R4",
+      "kind": "res",
+      "name": "Pull-up del receptor",
+      "pins": {
+        "1": "Y10",
+        "2": "Y14"
+      },
+      "value": "10 kΩ",
+      "note": ""
+    },
+    {
+      "id": "Q1",
+      "kind": "trans",
+      "name": "2N2222A",
+      "pins": {
+        "E": "H18",
+        "B": "I18",
+        "C": "J18"
+      },
+      "value": "",
+      "note": "Usar E/B/C de la pieza que ya funcionó. Recomendado zócalo hembra 1×3 en esos agujeros; no invertir la pieza por mirar la cara de cobre."
+    },
+    {
+      "id": "D2",
+      "kind": "led",
+      "name": "Indicador TX",
+      "pins": {
+        "A": "H25",
+        "K": "I25"
+      },
+      "value": "TX",
+      "note": ""
+    },
+    {
+      "id": "D3",
+      "kind": "led",
+      "name": "Indicador RX",
+      "pins": {
+        "A": "Y25",
+        "K": "Z25"
+      },
+      "value": "RX",
+      "note": ""
+    },
+    {
+      "id": "R5",
+      "kind": "res",
+      "name": "Limitadora indicador TX",
+      "pins": {
+        "1": "H28",
+        "2": "H32"
+      },
+      "value": "1 kΩ",
+      "note": ""
+    },
+    {
+      "id": "R6",
+      "kind": "res",
+      "name": "Limitadora indicador RX",
+      "pins": {
+        "1": "Y28",
+        "2": "Y32"
+      },
+      "value": "1 kΩ",
+      "note": ""
+    },
+    {
+      "id": "SW1",
+      "kind": "button",
+      "name": "Pulsador rojo de cuatro patas",
+      "pins": {
+        "S": "O33",
+        "libre1": "T33",
+        "libre2": "O35",
+        "G": "T35"
+      },
+      "value": "",
+      "note": "Se cablean dos esquinas diagonales S y G; las otras dos islas quedan sin cable externo. Huella prevista 12,7 × 5,08 mm, inferida del montaje que funcionó: comprobar encaje en seco y conmutación antes de soldar."
+    },
+    {
+      "id": "C1",
+      "kind": "cap",
+      "name": "Condensador cerámico sin polaridad",
+      "pins": {
+        "1": "O40",
+        "2": "Q40"
+      },
+      "value": "100 nF",
+      "note": "0,1 µF, habitualmente marcado 104. Ninguna pata tiene polaridad."
+    },
+    {
+      "id": "J1",
+      "kind": "header",
+      "name": "Conector hembra desmontable a Raspberry",
+      "pins": {
+        "GND": "N43",
+        "3V3": "O43",
+        "TX": "P43",
+        "RX": "Q43",
+        "TX_LED": "R43",
+        "RX_LED": "S43",
+        "PANIC": "T43"
+      },
+      "value": "1×7 · 2,54 mm",
+      "note": "Tira hembra para conservar los jumpers hembra–macho actuales. Enchufar con ambas alimentaciones desconectadas. Etiquetar cada contacto."
+    }
+  ],
+  "wires": [
+    {
+      "id": "W01",
+      "a": "O43",
+      "b": "AF43",
+      "net": "3V3",
+      "group": "alimentacion",
+      "why": "Pin 1 de Raspberry a la barra 3,3 V",
+      "via": [
+        "O46",
+        "AF46"
+      ]
+    },
+    {
+      "id": "W02",
+      "a": "O40",
+      "b": "AF40",
+      "net": "3V3",
+      "group": "alimentacion",
+      "why": "Desacoplo a 3,3 V",
+      "via": [
+        "O39",
+        "AF39"
+      ]
+    },
+    {
+      "id": "W03",
+      "a": "H10",
+      "b": "AF10",
+      "net": "3V3",
+      "group": "alimentacion",
+      "why": "Alimentación de R1",
+      "via": []
+    },
+    {
+      "id": "W04",
+      "a": "Y10",
+      "b": "AF11",
+      "net": "3V3",
+      "group": "alimentacion",
+      "why": "Alimentación de R4",
+      "via": [
+        "AC10",
+        "AC11"
+      ]
+    },
+    {
+      "id": "W05",
+      "a": "N43",
+      "b": "B43",
+      "net": "GND",
+      "group": "masa",
+      "why": "Pin 6 de Raspberry a la barra GND",
+      "via": []
+    },
+    {
+      "id": "W06",
+      "a": "Q40",
+      "b": "B40",
+      "net": "GND",
+      "group": "masa",
+      "why": "Desacoplo a GND",
+      "via": [
+        "Q38",
+        "B38"
+      ]
+    },
+    {
+      "id": "W07",
+      "a": "H18",
+      "b": "B18",
+      "net": "GND",
+      "group": "masa",
+      "why": "Emisor de Q1 a GND",
+      "via": []
+    },
+    {
+      "id": "W08",
+      "a": "P22",
+      "b": "B22",
+      "net": "GND",
+      "group": "masa",
+      "why": "R3 a GND",
+      "via": [
+        "P23",
+        "B23"
+      ]
+    },
+    {
+      "id": "W09",
+      "a": "Z05",
+      "b": "B05",
+      "net": "GND",
+      "group": "masa",
+      "why": "Emisor del PT333 a GND",
+      "via": [
+        "Z07",
+        "B07"
+      ]
+    },
+    {
+      "id": "W10",
+      "a": "I25",
+      "b": "B25",
+      "net": "GND",
+      "group": "masa",
+      "why": "Cátodo indicador TX a GND",
+      "via": []
+    },
+    {
+      "id": "W11",
+      "a": "Z25",
+      "b": "B26",
+      "net": "GND",
+      "group": "masa",
+      "why": "Cátodo indicador RX a GND",
+      "via": [
+        "Z26"
+      ]
+    },
+    {
+      "id": "W12",
+      "a": "T35",
+      "b": "B35",
+      "net": "GND",
+      "group": "masa",
+      "why": "Contacto G del botón a GND",
+      "via": [
+        "T37",
+        "B37"
+      ]
+    },
+    {
+      "id": "W13",
+      "a": "H14",
+      "b": "H05",
+      "net": "IR_A",
+      "group": "emisor",
+      "why": "R1 al ánodo del LED IR",
+      "via": [
+        "F14",
+        "F05"
+      ]
+    },
+    {
+      "id": "W14",
+      "a": "I05",
+      "b": "J18",
+      "net": "COL",
+      "group": "emisor",
+      "why": "Cátodo IR al colector Q1",
+      "via": [
+        "K05",
+        "K16",
+        "J16"
+      ]
+    },
+    {
+      "id": "W15",
+      "a": "P43",
+      "b": "Q18",
+      "net": "TX",
+      "group": "emisor",
+      "why": "GPIO17 a R2",
+      "via": [
+        "P45",
+        "AC45",
+        "AC18"
+      ]
+    },
+    {
+      "id": "W16",
+      "a": "M18",
+      "b": "I18",
+      "net": "BASE",
+      "group": "emisor",
+      "why": "R2 a base Q1",
+      "via": [
+        "M17",
+        "I17"
+      ]
+    },
+    {
+      "id": "W17",
+      "a": "I18",
+      "b": "L22",
+      "net": "BASE",
+      "group": "emisor",
+      "why": "Base Q1 a R3",
+      "via": [
+        "I21",
+        "L21"
+      ]
+    },
+    {
+      "id": "W18",
+      "a": "Y14",
+      "b": "Y05",
+      "net": "RX",
+      "group": "receptor",
+      "why": "R4 al colector PT333",
+      "via": [
+        "W14",
+        "W05"
+      ]
+    },
+    {
+      "id": "W19",
+      "a": "Q43",
+      "b": "Y14",
+      "net": "RX",
+      "group": "receptor",
+      "why": "Nodo RX a GPIO27",
+      "via": [
+        "Q46",
+        "AB46",
+        "AB14"
+      ]
+    },
+    {
+      "id": "W20",
+      "a": "R43",
+      "b": "H32",
+      "net": "TX_LED",
+      "group": "indicadores",
+      "why": "GPIO22 a R5",
+      "via": [
+        "R41",
+        "H41"
+      ]
+    },
+    {
+      "id": "W21",
+      "a": "H28",
+      "b": "H25",
+      "net": "TX_A",
+      "group": "indicadores",
+      "why": "R5 al ánodo indicador TX",
+      "via": []
+    },
+    {
+      "id": "W22",
+      "a": "S43",
+      "b": "Y32",
+      "net": "RX_LED",
+      "group": "indicadores",
+      "why": "GPIO23 a R6",
+      "via": [
+        "S42",
+        "Y42"
+      ]
+    },
+    {
+      "id": "W23",
+      "a": "Y28",
+      "b": "Y25",
+      "net": "RX_A",
+      "group": "indicadores",
+      "why": "R6 al ánodo indicador RX",
+      "via": []
+    },
+    {
+      "id": "W24",
+      "a": "T43",
+      "b": "O33",
+      "net": "PANIC",
+      "group": "boton",
+      "why": "GPIO24 al contacto S del botón",
+      "via": [
+        "U43",
+        "U30",
+        "O30"
+      ]
+    }
+  ],
+  "buses": [
+    {
+      "id": "BG",
+      "a": "B03",
+      "b": "B45",
+      "net": "GND"
+    },
+    {
+      "id": "BV",
+      "a": "AF03",
+      "b": "AF45",
+      "net": "3V3"
+    }
+  ],
+  "nets": {
+    "3V3": [
+      "J1.3V3",
+      "R1.1",
+      "R4.1",
+      "C1.1"
+    ],
+    "GND": [
+      "J1.GND",
+      "Q1.E",
+      "Q2.E",
+      "R3.2",
+      "D2.K",
+      "D3.K",
+      "SW1.G",
+      "C1.2"
+    ],
+    "IR_A": [
+      "R1.2",
+      "D1.A"
+    ],
+    "COL": [
+      "D1.K",
+      "Q1.C"
+    ],
+    "TX": [
+      "J1.TX",
+      "R2.2"
+    ],
+    "BASE": [
+      "R2.1",
+      "Q1.B",
+      "R3.1"
+    ],
+    "RX": [
+      "J1.RX",
+      "R4.2",
+      "Q2.C"
+    ],
+    "TX_LED": [
+      "J1.TX_LED",
+      "R5.2"
+    ],
+    "TX_A": [
+      "R5.1",
+      "D2.A"
+    ],
+    "RX_LED": [
+      "J1.RX_LED",
+      "R6.2"
+    ],
+    "RX_A": [
+      "R6.1",
+      "D3.A"
+    ],
+    "PANIC": [
+      "J1.PANIC",
+      "SW1.S"
+    ]
+  },
+  "raspberry": [
+    {
+      "name": "GND",
+      "physical": 6,
+      "bcm": null,
+      "pad": "N43"
+    },
+    {
+      "name": "3V3",
+      "physical": 1,
+      "bcm": null,
+      "pad": "O43"
+    },
+    {
+      "name": "TX",
+      "physical": 11,
+      "bcm": 17,
+      "pad": "P43"
+    },
+    {
+      "name": "RX",
+      "physical": 13,
+      "bcm": 27,
+      "pad": "Q43"
+    },
+    {
+      "name": "TX_LED",
+      "physical": 15,
+      "bcm": 22,
+      "pad": "R43"
+    },
+    {
+      "name": "RX_LED",
+      "physical": 16,
+      "bcm": 23,
+      "pad": "S43"
+    },
+    {
+      "name": "PANIC",
+      "physical": 18,
+      "bcm": 24,
+      "pad": "T43"
+    }
+  ]
+}
